@@ -17,8 +17,14 @@ class App extends Component {
   filter: '',
   }
   componentDidMount() {
-    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    const getContacts = localStorage.getItem('contacts')
+    
+    if (getContacts) {
+    const contacts = JSON.parse(getContacts);
+
     contacts && this.setState({ contacts: contacts });
+    }
+
   }
   
   componentDidUpdate(prevProps, prevState) {
@@ -68,7 +74,9 @@ class App extends Component {
 
   getFilteredContacts = () => {
     const { contacts, filter } = this.state;
-
+    if (!filter) {
+      return contacts
+    }
     const filterText = filter.toLowerCase();
     const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(filterText));
     return filteredContacts;
