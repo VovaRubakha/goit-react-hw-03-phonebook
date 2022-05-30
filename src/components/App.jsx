@@ -20,7 +20,7 @@ class App extends Component {
     const getContacts = localStorage.getItem('contacts')
     const contacts = JSON.parse(getContacts);
     
-    if (contacts, contacts.length) {
+    if (contacts?.length) {
     this.setState({ contacts: contacts });
     }
   }
